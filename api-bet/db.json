@@ -1,0 +1,50 @@
+{
+  "usuarios": [
+    {
+      "id": "1",
+      "nome": "Professor Admin",
+      "email": "admin@email.com",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "nome": "Danyel Jogador",
+      "email": "jogador@email.com",
+      "role": "player",
+      "saldo": 500.00
+    }
+  ],
+  "eventos": [
+    {
+      "id": "evt-1",
+      "esporte": "Futebol",
+      "timeCasa": "Flamengo",
+      "timeVisitante": "Palmeiras",
+      "data": "2026-06-20T16:00:00Z",
+      "status": "aberto",
+      "resultado": null,
+      "odds": { "casa": 1.90, "empate": 3.40, "visitante": 4.00 }
+    },
+    {
+      "id": "evt-2",
+      "esporte": "Basquete",
+      "timeCasa": "Los Angeles Lakers",
+      "timeVisitante": "Boston Celtics",
+      "data": "2026-06-21T21:00:00Z",
+      "status": "aberto",
+      "resultado": null,
+      "odds": { "casa": 1.55, "empate": 11.00, "visitante": 2.50 }
+    }
+  ],
+  "apostas": [],
+  "movimentacoes": [
+    {
+      "id": "mov-init",
+      "usuarioId": "2",
+      "tipo": "entrada",
+      "descricao": "Saldo Inicial Fictício",
+      "valor": 500.00,
+      "data": "2026-06-15T12:00:00Z"
+    }
+  ]
+}
