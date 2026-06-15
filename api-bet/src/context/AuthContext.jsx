@@ -7,7 +7,6 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Restaura o usuário logado ao recarregar a página
   useEffect(() => {
     const usuarioSalvo = localStorage.getItem('@BetAcademica:user');
     if (usuarioSalvo) {
@@ -16,7 +15,6 @@ export function AuthProvider({ children }) {
     setLoading(false);
   }, []);
 
-  // Função de Login Simulada
   const login = async (email) => {
     try {
       const response = await api.get(`/usuarios?email=${email}`);
@@ -24,7 +22,7 @@ export function AuthProvider({ children }) {
         const usuarioLogado = response.data[0];
         setUser(usuarioLogado);
         localStorage.setItem('@BetAcademica:user', JSON.stringify(usuarioLogado));
-        return usuarioLogado.role; // Retorna o perfil para redirecionamento
+        return usuarioLogado.role;
       } else {
         throw new Error('Usuário não encontrado.');
       }
@@ -34,13 +32,11 @@ export function AuthProvider({ children }) {
     }
   };
 
-  // Função de Logout
   const logout = () => {
     setUser(null);
     localStorage.removeItem('@BetAcademica:user');
   };
 
-  // Função para atualizar o saldo globalmente na aplicação
   const atualizarSaldo = (novoSaldo) => {
     setUser((prev) => {
       const usuarioAtualizado = { ...prev, saldo: novoSaldo };
@@ -49,14 +45,36 @@ export function AuthProvider({ children }) {
     });
   };
 
+  // 🔥 NOVA FUNÇÃO: Busca o saldo real e atualizado direto do JSON Server
+  const sincronizarPerfil = async () => {
+    const usuarioSalvo = localStorage.getItem('@BetAcademica:user');
+    if (!usuarioSalvo) return;
+    
+    const parsedUser = JSON.parse(usuarioSalvo);
+    try {
+      const response = await api.get(`/usuarios/${parsedUser.id}`);
+      setUser(response.data);
+      localStorage.setItem('@BetAcademica:user', JSON.stringify(response.data));
+    } catch (error) {
+      console.error("Erro ao sincronizar dados do banco:", error);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, atualizarSaldo, authenticated: !!user, loading }}>
+    <AuthContext.Provider value={{ 
+      user, 
+      login, 
+      logout, 
+      atualizarSaldo, 
+      sincronizarPerfil, // <-- Exportando a nova função
+      authenticated: !!user, 
+      loading 
+    }}>
       {children}
     </AuthContext.Provider>
   );
 }
 
-// Hook customizado para facilitar o uso do contexto nos componentes
 export function useAuth() {
   return useContext(AuthContext);
 }

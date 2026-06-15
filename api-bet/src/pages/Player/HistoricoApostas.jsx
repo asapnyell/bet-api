@@ -4,15 +4,16 @@ import { useAuth } from '../../context/AuthContext';
 import Navbar from '../../components/Navbar';
 
 export default function HistoricoApostas() {
-  const { user } = useAuth();
+  const { user, sincronizarPerfil } = useAuth();
   const [apostas, setApostas] = useState([]);
   const [carregando, setCarregando] = useState(true);
 
   useEffect(() => {
     async function carregarApostas() {
+      await sincronizarPerfil(); // Sincroniza o perfil antes de carregar as apostas
       try {
         // O '_expand=evento' faz o JSON Server juntar os dados do evento na resposta
-        const response = await api.get(`/apostas?usuarioId=${user.id}&_expand=evento&_sort=dataAposta&_order=desc`);
+        const response = await api.get(`/apostas?usuarioId=${String(user.id)}&_expand=evento&_sort=dataAposta&_order=desc`);
         setApostas(response.data);
       } catch (error) {
         console.error("Erro ao buscar histórico de apostas:", error);

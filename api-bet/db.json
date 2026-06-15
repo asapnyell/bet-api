@@ -11,7 +11,7 @@
       "nome": "Danyel Jogador",
       "email": "jogador@email.com",
       "role": "player",
-      "saldo": 500.00
+      "saldo": 2050
     }
   ],
   "eventos": [
@@ -21,9 +21,13 @@
       "timeCasa": "Flamengo",
       "timeVisitante": "Palmeiras",
       "data": "2026-06-20T16:00:00Z",
-      "status": "aberto",
-      "resultado": null,
-      "odds": { "casa": 1.90, "empate": 3.40, "visitante": 4.00 }
+      "status": "encerrado",
+      "resultado": "casa",
+      "odds": {
+        "casa": 1.9,
+        "empate": 3.4,
+        "visitante": 4
+      }
     },
     {
       "id": "evt-2",
@@ -31,20 +35,130 @@
       "timeCasa": "Los Angeles Lakers",
       "timeVisitante": "Boston Celtics",
       "data": "2026-06-21T21:00:00Z",
-      "status": "aberto",
-      "resultado": null,
-      "odds": { "casa": 1.55, "empate": 11.00, "visitante": 2.50 }
+      "status": "encerrado",
+      "resultado": "visitante",
+      "odds": {
+        "casa": 1.55,
+        "empate": 11,
+        "visitante": 2.5
+      }
+    },
+    {
+      "esporte": "Basquete",
+      "timeCasa": "New York Nicks",
+      "timeVisitante": "Sant Antonio Spurs",
+      "data": "2026-06-21T01:00:00.000Z",
+      "status": "encerrado",
+      "resultado": "casa",
+      "odds": {
+        "casa": 2,
+        "empate": 1,
+        "visitante": 5
+      },
+      "id": "zZfpKRNlYpU"
+    },
+    {
+      "esporte": "Futebol",
+      "timeCasa": "Brasil",
+      "timeVisitante": "Marrocos",
+      "data": "2026-06-20T22:00:00.000Z",
+      "status": "encerrado",
+      "resultado": "casa",
+      "odds": {
+        "casa": 2,
+        "empate": 3,
+        "visitante": 3.5
+      },
+      "id": "Jy_6B9UFJbg"
+    },
+    {
+      "esporte": "Futebol",
+      "timeCasa": "Espanha",
+      "timeVisitante": "Cabo Verde",
+      "data": "2026-09-25T08:02:00.000Z",
+      "status": "encerrado",
+      "resultado": "casa",
+      "odds": {
+        "casa": 3,
+        "empate": 2,
+        "visitante": 5
+      },
+      "id": "J3Gk58uT4Y0"
     }
   ],
-  "apostas": [],
+  "apostas": [
+    {
+      "usuarioId": "2",
+      "eventoId": "zZfpKRNlYpU",
+      "palpite": "casa",
+      "valorApostado": 50,
+      "retornoPossivel": 100,
+      "status": "ganha",
+      "dataAposta": "2026-06-15T13:03:42.203Z",
+      "id": "-9vPg6-STyA"
+    },
+    {
+      "usuarioId": "2",
+      "eventoId": "Jy_6B9UFJbg",
+      "palpite": "casa",
+      "valorApostado": 500,
+      "retornoPossivel": 1000,
+      "status": "ganha",
+      "dataAposta": "2026-06-15T13:12:23.165Z",
+      "id": "xp87vF6kE7c"
+    },
+    {
+      "usuarioId": "2",
+      "eventoId": "J3Gk58uT4Y0",
+      "palpite": "casa",
+      "valorApostado": 500,
+      "retornoPossivel": 1500,
+      "status": "ganha",
+      "dataAposta": "2026-06-15T13:18:34.869Z",
+      "id": "Ad9wvED09j8"
+    }
+  ],
   "movimentacoes": [
     {
       "id": "mov-init",
       "usuarioId": "2",
       "tipo": "entrada",
       "descricao": "Saldo Inicial Fictício",
-      "valor": 500.00,
+      "valor": 500,
       "data": "2026-06-15T12:00:00Z"
+    },
+    {
+      "usuarioId": "2",
+      "tipo": "saida",
+      "descricao": "Aposta Efetuada: New York Nicks x Sant Antonio Spurs (CASA)",
+      "valor": 50,
+      "data": "2026-06-15T13:03:42.226Z",
+      "id": "-wG7dFN0oWY"
+    },
+    {
+      "usuarioId": "2",
+      "tipo": "saida",
+      "descricao": "Aposta Efetuada: Brasil x Marrocos (CASA)",
+      "valor": 500,
+      "data": "2026-06-15T13:12:23.183Z",
+      "id": "o32fbtIjph4"
+    },
+    {
+      "usuarioId": "2",
+      "tipo": "saida",
+      "descricao": "Aposta Efetuada: Espanha x Cabo Verde (CASA)",
+      "valor": 500,
+      "data": "2026-06-15T13:18:34.891Z",
+      "id": "14VvNcUxzhk"
+    },
+    {
+      "usuarioId": "2",
+      "tipo": "entrada",
+      "descricao": "Prêmio Recebido! Vitória no evento: Espanha x Cabo Verde",
+      "valor": 1500,
+      "data": "2026-06-15T13:18:48.984Z",
+      "id": "iYKRIhNVVaU"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

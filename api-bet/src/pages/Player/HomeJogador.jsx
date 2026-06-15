@@ -9,12 +9,13 @@ export default function HomeJogador() {
   const [esporteSelecionado, setEsporteSelecionado] = useState('Todos');
   
   // Estados para o controle do Modal de Aposta
-  const { user, atualizarSaldo } = useAuth();
+  const { user, atualizarSaldo, sincronizarPerfil } = useAuth();
   const [modalAberto, setModalAberto] = useState(false);
   const [eventoSelecionado, setEventoSelecionado] = useState(null);
   const [palpiteSelecionado, setPalpiteSelecionado] = useState('');
   const [oddSelecionada, setOddSelecionada] = useState(0);
   const [valorApostado, setValorApostado] = useState('');
+  
 
   useEffect(() => {
     async function carregarEventos() {
@@ -64,8 +65,8 @@ export default function HomeJogador() {
     try {
       // 1. Registra a aposta na coleção /apostas
       await api.post('/apostas', {
-        usuarioId: user.id,
-        eventoId: eventoSelecionado.id,
+        usuarioId: String(user.id),
+        eventoId: String(eventoSelecionado.id),
         palpite: palpiteSelecionado,
         valorApostado: valor,
         retornoPossivel: Number(retornoPossivel),
@@ -79,7 +80,7 @@ export default function HomeJogador() {
 
       // 3. Registra a transação no Extrato (/movimentacoes) - Funcionalidade Extra
       await api.post('/movimentacoes', {
-        usuarioId: user.id,
+        usuarioId: String(user.id),
         tipo: 'saida',
         descricao: `Aposta Efetuada: ${eventoSelecionado.timeCasa} x ${eventoSelecionado.timeVisitante} (${palpiteSelecionado.toUpperCase()})`,
         valor: valor,
@@ -88,7 +89,8 @@ export default function HomeJogador() {
 
       // 4. Sincroniza o estado global da aplicação
       atualizarSaldo(novoSaldo);
-      
+      sincronizarPerfil(); // <-- Chama a função para sincronizar o perfil
+
       setModalAberto(false);
       alert('Aposta realizada com sucesso!');
     } catch (error) {
